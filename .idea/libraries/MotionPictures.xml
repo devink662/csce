@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MotionPictures">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/MotionPictures.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
