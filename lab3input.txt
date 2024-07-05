@@ -1,0 +1,13 @@
+yellow
+blue
+green
+red
+orange
+purple
+brown
+black
+garnet
+teal
+pink
+white
+beige
