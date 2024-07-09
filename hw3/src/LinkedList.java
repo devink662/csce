@@ -1,4 +1,3 @@
-
 /*
  * © 2024 Devin Kemp. All rights reserved.
  * University of South Carolina, Summer 2024 Semester
