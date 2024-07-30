@@ -1,12 +1,3 @@
-/*
- * © 2024 Devin Kemp. All rights reserved.
- * University of South Carolina, Summer 2024 Semester
- * CSCE 146 Algorithmic Design 2
- *
- * This work is the intellectual property of Devin Kemp. Unauthorized use, reproduction, or distribution of this material without explicit permission from the author is prohibited. This document is intended for educational purposes only and may not be used for commercial purposes or published without prior consent.
- */
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -98,6 +89,24 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
         }
     }
 
+    public T findMin() {
+        if (root == null) {
+            return null;
+        }
+        return findMin(root);
+    }
+
+    public T findMax() {
+        if (root == null) {
+            return null;
+        }
+        Node current = root;
+        while (current.right != null) {
+            current = current.right;
+        }
+        return current.value;
+    }
+
     public void printInOrder() {
         printInOrderRecursive(root);
     }
@@ -110,29 +119,22 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
         }
     }
 
-    public void printDescendingOrder() {
-        printDescendingOrderRecursive(root);
-    }
+    public String descendingOrder() {
+        StringBuilder sb = new StringBuilder();
+        Stack<Node> stack = new Stack<>();
+        Node current = root;
 
-    private void printDescendingOrderRecursive(Node node) {
-        if (node != null) {
-            printDescendingOrderRecursive(node.right);
-            System.out.println(node.value);
-            printDescendingOrderRecursive(node.left);
+        while (!stack.isEmpty() || current != null) {
+            if (current != null) {
+                stack.push(current);
+                current = current.right;
+            } else {
+                current = stack.pop();
+                sb.append(current.value).append("\n");
+                current = current.left;
+            }
         }
-    }
-
-    public void writeInOrder(BufferedWriter writer) throws IOException {
-        writeInOrderRecursive(root, writer);
-    }
-
-    private void writeInOrderRecursive(Node node, BufferedWriter writer) throws IOException {
-        if (node != null) {
-            writeInOrderRecursive(node.left, writer);
-            writer.write(node.value.toString());
-            writer.newLine();
-            writeInOrderRecursive(node.right, writer);
-        }
+        return sb.toString();
     }
 
     @Override
@@ -161,7 +163,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
 
         @Override
         public T next() {
-            Node node = stack.pop();
+            Node node = stack.peek();
             T result = node.value;
             if (node.right != null) {
                 pushLeft(node.right);
@@ -170,4 +172,3 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
         }
     }
 }
-
